@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/views/category_view.dart';
 
 class CategoryWidgets extends StatelessWidget {
   final String imageUrl;
@@ -11,7 +13,10 @@ class CategoryWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (() {
-        
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryView(category: categoryName.toLowerCase())));
       }),
       child: Container(
         margin: const EdgeInsets.only(right: 16),
@@ -19,15 +24,16 @@ class CategoryWidgets extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
-              child: Image.network(
-                imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                fit: BoxFit.cover,
                 width: 120,
                 height: 60,
               ),
             ),
             Container(
               color: Colors.black26,
-               alignment: Alignment.center,
+              alignment: Alignment.center,
               width: 120,
               height: 60,
               child: Text(
